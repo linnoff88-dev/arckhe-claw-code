@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>claw-code — harness de agente experimental (Python/Rust)</title>
+<meta name="description" content="claw-code é uma reescrita experimental, não afiliada à Anthropic, de um harness de agente estilo linha de comando — workspace Python de porting com auditoria de paridade e um port em Rust em andamento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  .notice{background:rgba(226,162,59,.08);border:1px solid rgba(226,162,59,.35);border-radius:14px;padding:18px 20px;font-size:.92rem;color:var(--txt)}
+  .notice strong{color:var(--amb)}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🐾</span> claw-code</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">O que é</a>
+    <a class="sec" href="#fluxo">Como funciona</a>
+    <a class="sec" href="#guia">Guia de uso</a>
+    <a class="sec" href="#roadmap">Roadmap</a>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/claw-code" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Harness experimental · Python → Rust</span>
+      <h1>Um harness de agente <span class="amb">independente</span>, reescrito do zero</h1>
+      <p class="lead">claw-code é uma reescrita experimental — hoje um workspace Python de "porting", com um port em Rust começando — que estuda como um harness de agente de linha de comando organiza comandos, ferramentas e o loop de execução. Projeto de pesquisa pessoal, <strong>sem afiliação, endosso ou vínculo com a Anthropic</strong>.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Começar o guia</a>
+        <a class="btn ghost" href="https://github.com/inematds/claw-code" target="_blank" rel="noopener">Ver no GitHub</a>
+      </div>
+    </div>
+    <figure><img src="assets/hero.png" alt="Ilustração abstrata do claw-code, harness de agente experimental"></figure>
+  </div>
+</header>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">O que é</span>
+  <h2>Um estudo de "harness engineering", não um produto oficial</h2>
+  <p class="sub">O repositório documenta a própria origem: em março de 2026, um código-fonte de harness de agente vazou publicamente. O autor estudou essa arquitetura e, em vez de manter o material vazado como fonte principal, escreveu por cima um workspace próprio em Python (e, na sequência, começou um port em Rust) descrevendo comandos, ferramentas e módulos observados — sem redistribuir o código proprietário original.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🐍 Workspace Python (<code>src/</code>)</h3><p>66 arquivos Python: manifesto do workspace, metadados de comandos/ferramentas portados, motor de query e um CLI (<code>src/main.py</code>) pra inspecionar tudo isso.</p></div>
+    <div class="card"><h3>🦀 Port em Rust (<code>rust/</code>)</h3><p>Workspace Cargo em estágio inicial (scaffolding): crates <code>rusty-claude-cli</code>, <code>runtime</code>, <code>commands</code>, <code>tools</code> e <code>compat-harness</code> — ainda não é substituto funcional completo.</p></div>
+    <div class="card"><h3>🔍 Auditoria de paridade</h3><p><code>parity-audit</code> compara o workspace Python contra um arquivo local (ignorado pelo git, quando presente) só pra medir cobertura — não republica nem versiona o material original.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Como funciona</span>
+  <h2>Do estudo do harness original ao workspace versionado</h2>
+  <p class="sub">O pipeline é sequencial: primeiro o material de referência foi estudado (fora do controle de versão), depois reescrito em Python, e agora está sendo portado, módulo a módulo, para Rust.</p>
+  <div class="flow">
+    <span>Estudo do harness vazado (não versionado)</span><span class="arr">→</span>
+    <span>Workspace Python em <code>src/</code></span><span class="arr">→</span>
+    <span>CLI de manifesto/resumo/tools</span><span class="arr">→</span>
+    <span>Testes (<code>unittest</code>)</span><span class="arr">→</span>
+    <span>Port em Rust (<code>rust/</code>, em progresso)</span>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Pré-requisitos</span>
+  <h2>O que precisa estar instalado</h2>
+  <p class="sub">Sem dependências externas — o workspace Python usa só a biblioteca padrão, e o port Rust usa o toolchain padrão do Cargo.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Python 3</h3><p>Qualquer Python 3.x recente (testado com 3.12). Nenhum pacote externo é necessário.</p><pre><span class="c"># confira a versão</span>
+<span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Git</h3><p>Pra clonar o repositório.</p><pre><span class="c"># clonar</span>
+<span class="k">git clone git@github.com:inematds/claw-code.git</span></pre></div>
+    <div class="card"><h3>Rust + Cargo (opcional)</h3><p>Só necessário se for explorar o port em <code>rust/</code>, ainda em estágio de scaffolding.</p><pre><span class="c"># confira o cargo</span>
+<span class="k">cargo --version</span></pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guia de uso · passo a passo</span>
+  <h2>Explorando o workspace Python</h2>
+  <p class="sub">Todos os comandos abaixo rodam a partir da raiz do repositório clonado, com o Python padrão do sistema.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Resumo do workspace de porting</h3>
+    <p>Mostra quantos arquivos Python existem e o que cada módulo de topo faz.</p>
+<pre><span class="k">python3 -m src.main summary</span>  <span class="c"># imprime o resumo do workspace (66 arquivos, etc.)</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Manifesto atual</h3>
+    <p>Lista o manifesto completo do workspace Python ativo.</p>
+<pre><span class="k">python3 -m src.main manifest</span>  <span class="c"># imprime o manifesto do workspace</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Subsistemas, comandos e ferramentas portados</h3>
+    <p>Inspeciona os inventários de módulos, comandos e ferramentas mapeados a partir do harness original.</p>
+<pre><span class="k">python3 -m src.main subsystems --limit 16</span>
+<span class="k">python3 -m src.main commands --limit 10</span>
+<span class="k">python3 -m src.main tools --limit 10</span>  <span class="c"># cada um lista as entradas correspondentes</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Rodar a suíte de testes</h3>
+    <p>Valida o workspace Python atual (22 testes na versão corrente).</p>
+<pre><span class="k">python3 -m unittest discover -s tests -v</span>  <span class="c"># roda a suíte de verificação</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Auditoria de paridade (opcional)</h3>
+    <p>Compara a cobertura do port contra um arquivo local ignorado pelo git, quando presente no seu ambiente.</p>
+<pre><span class="k">python3 -m src.main parity-audit</span>  <span class="c"># só funciona se você tiver o arquivo local de referência</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Explorar o port em Rust (opcional)</h3>
+    <p>O workspace Cargo em <code>rust/</code> ainda é scaffolding — crates de runtime, comandos e ferramentas com testes que extraem metadados do workspace Python.</p>
+<pre><span class="c"># a partir de rust/</span>
+<span class="k">cargo check --workspace</span>
+<span class="k">cargo test --workspace</span>
+<span class="k">cargo run -p rusty-claude-cli -- --help</span></pre>
+  </div></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>Onde o projeto está e para onde vai</h2>
+  <p class="sub">Segundo o próprio README do projeto — o port ainda não é um substituto funcional completo do harness original.</p>
+  <div class="phase"><div class="tag">Feito</div><div class="d"><strong>Workspace Python versionado</strong><span>Manifesto, comandos, ferramentas e motor de query cobrindo a superfície observada do harness original, com suíte de testes própria.</span></div></div>
+  <div class="phase"><div class="tag">Em curso</div><div class="d"><strong>Port em Rust</strong><span>Scaffolding de crates (runtime, comandos, ferramentas, compat-harness) — meta declarada é paridade de runtime, ainda não atingida.</span></div></div>
+  <div class="phase"><div class="tag">Aberto</div><div class="d"><strong>Paridade de runtime completa</strong><span>O próprio projeto reconhece que o workspace Python ainda tem menos "fatias" executáveis do que o material original estudado.</span></div></div>
+</div></section>
+
+<section id="afiliacao"><div class="wrap">
+  <span class="chip">Nota de não afiliação</span>
+  <h2>Isto não é um produto Anthropic</h2>
+  <div class="notice">
+    <p><strong>claw-code é um projeto experimental e independente.</strong> Ele nasceu do estudo de um vazamento público de código de harness de agente e existe, hoje, como uma reescrita própria (Python, com port em Rust em progresso) dos padrões arquiteturais observados — não como cópia do material original, nem como produto mantido, endossado ou de qualquer forma afiliado à Anthropic. O próprio README do repositório declara isso explicitamente. Este guia trata o projeto como o que ele é: uma pesquisa pessoal de engenharia de harness, com todas as limitações de um port em andamento.</p>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python</div><div class="pill">Rust / Cargo</div><div class="pill">unittest</div>
+    <p style="margin-top:18px">claw-code · reescrita experimental, não afiliada à Anthropic ·
+      <a href="https://github.com/inematds/claw-code">github.com/inematds/claw-code</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='claw-code-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
