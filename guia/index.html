@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>claw-code â€” harness de agente experimental (Python/Rust)</title>
-<meta name="description" content="claw-code Ã© uma reescrita experimental, nÃ£o afiliada Ã  Anthropic, de um harness de agente estilo linha de comando â€” workspace Python de porting com auditoria de paridade e um port em Rust em andamento.">
+<title>claw-code ê¢â¬â harness de agente experimental (Python/Rust)</title>
+<meta name="description" content="claw-code êÂ© uma reescrita experimental, nêÂ£o afiliada êÂ  Anthropic, de um harness de agente estilo linha de comando ê¢â¬â workspace Python de porting com auditoria de paridade e um port em Rust em andamento.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -36,8 +36,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .ARCKHÉ:hover{filter:brightness(1.15)}
+  nav .ARCKHê{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHê:hover{filter:brightness(1.15)}
   nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .pro:hover{filter:brightness(1.15)}
   nav .clubpro{display:inline-flex;align-items:center;gap:6px}
@@ -91,19 +91,19 @@
 <body>
 
 <nav><div class="wrap">
-  <a class="brand" href="#top"><span class="emoji">ðŸ¾</span> claw-code</a>
+  <a class="brand" href="#top"><span class="emoji">ê°Å¸ÂÂ¾</span> claw-code</a>
   <span class="sep">|</span>
   <span class="clubpro">
-    <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
+    <a class="ARCKHê" href="https://ARCKHê AI" target="_blank" rel="noopener">ARCKHê AI</a>
     <span class="sep">-</span>
-    <a class="pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">PRO</a>
+    <a class="pro" href="https://ARCKHê.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <div class="links">
-    <a class="sec" href="#oque">O que Ã©</a>
+    <a class="sec" href="#oque">O que êÂ©</a>
     <a class="sec" href="#fluxo">Como funciona</a>
     <a class="sec" href="#guia">Guia de uso</a>
     <a class="sec" href="#roadmap">Roadmap</a>
-    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">ðŸŒ™</button>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">ê°Å¸Åâ¢</button>
     <a class="btn" href="https://github.com/linnoff88-dev/claw-code" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
@@ -112,64 +112,64 @@
   <div class="glow"></div>
   <div class="wrap">
     <div>
-      <span class="chip">Harness experimental Â· Python â†’ Rust</span>
+      <span class="chip">Harness experimental êÂ· Python ê¢â â Rust</span>
       <h1>Um harness de agente <span class="amb">independente</span>, reescrito do zero</h1>
-      <p class="lead">claw-code Ã© uma reescrita experimental â€” hoje um workspace Python de "porting", com um port em Rust comeÃ§ando â€” que estuda como um harness de agente de linha de comando organiza comandos, ferramentas e o loop de execuÃ§Ã£o. Projeto de pesquisa pessoal, <strong>sem afiliaÃ§Ã£o, endosso ou vÃ­nculo com a Anthropic</strong>.</p>
+      <p class="lead">claw-code êÂ© uma reescrita experimental ê¢â¬â hoje um workspace Python de "porting", com um port em Rust comeêÂ§ando ê¢â¬â que estuda como um harness de agente de linha de comando organiza comandos, ferramentas e o loop de execuêÂ§êÂ£o. Projeto de pesquisa pessoal, <strong>sem afiliaêÂ§êÂ£o, endosso ou vêÂ­nculo com a Anthropic</strong>.</p>
       <div class="cta">
-        <a class="btn" href="#guia">ComeÃ§ar o guia</a>
+        <a class="btn" href="#guia">ComeêÂ§ar o guia</a>
         <a class="btn ghost" href="https://github.com/linnoff88-dev/claw-code" target="_blank" rel="noopener">Ver no GitHub</a>
       </div>
     </div>
-    <figure><img src="assets/hero.png" alt="IlustraÃ§Ã£o abstrata do claw-code, harness de agente experimental"></figure>
+    <figure><img src="assets/hero.png" alt="IlustraêÂ§êÂ£o abstrata do claw-code, harness de agente experimental"></figure>
   </div>
 </header>
 
 <section id="oque"><div class="wrap">
-  <span class="chip">O que Ã©</span>
-  <h2>Um estudo de "harness engineering", nÃ£o um produto oficial</h2>
-  <p class="sub">O repositÃ³rio documenta a prÃ³pria origem: em marÃ§o de 2026, um cÃ³digo-fonte de harness de agente vazou publicamente. O autor estudou essa arquitetura e, em vez de manter o material vazado como fonte principal, escreveu por cima um workspace prÃ³prio em Python (e, na sequÃªncia, comeÃ§ou um port em Rust) descrevendo comandos, ferramentas e mÃ³dulos observados â€” sem redistribuir o cÃ³digo proprietÃ¡rio original.</p>
+  <span class="chip">O que êÂ©</span>
+  <h2>Um estudo de "harness engineering", nêÂ£o um produto oficial</h2>
+  <p class="sub">O repositêÂ³rio documenta a prêÂ³pria origem: em marêÂ§o de 2026, um cêÂ³digo-fonte de harness de agente vazou publicamente. O autor estudou essa arquitetura e, em vez de manter o material vazado como fonte principal, escreveu por cima um workspace prêÂ³prio em Python (e, na sequêÂªncia, comeêÂ§ou um port em Rust) descrevendo comandos, ferramentas e mêÂ³dulos observados ê¢â¬â sem redistribuir o cêÂ³digo proprietêÂ¡rio original.</p>
   <div class="grid g3">
-    <div class="card"><h3>ðŸ Workspace Python (<code>src/</code>)</h3><p>66 arquivos Python: manifesto do workspace, metadados de comandos/ferramentas portados, motor de query e um CLI (<code>src/main.py</code>) pra inspecionar tudo isso.</p></div>
-    <div class="card"><h3>ðŸ¦€ Port em Rust (<code>rust/</code>)</h3><p>Workspace Cargo em estÃ¡gio inicial (scaffolding): crates <code>rusty-claude-cli</code>, <code>runtime</code>, <code>commands</code>, <code>tools</code> e <code>compat-harness</code> â€” ainda nÃ£o Ã© substituto funcional completo.</p></div>
-    <div class="card"><h3>ðŸ” Auditoria de paridade</h3><p><code>parity-audit</code> compara o workspace Python contra um arquivo local (ignorado pelo git, quando presente) sÃ³ pra medir cobertura â€” nÃ£o republica nem versiona o material original.</p></div>
+    <div class="card"><h3>ê°Å¸ÂÂ Workspace Python (<code>src/</code>)</h3><p>66 arquivos Python: manifesto do workspace, metadados de comandos/ferramentas portados, motor de query e um CLI (<code>src/main.py</code>) pra inspecionar tudo isso.</p></div>
+    <div class="card"><h3>ê°Å¸Â¦â¬ Port em Rust (<code>rust/</code>)</h3><p>Workspace Cargo em estêÂ¡gio inicial (scaffolding): crates <code>rusty-claude-cli</code>, <code>runtime</code>, <code>commands</code>, <code>tools</code> e <code>compat-harness</code> ê¢â¬â ainda nêÂ£o êÂ© substituto funcional completo.</p></div>
+    <div class="card"><h3>ê°Å¸âÂ Auditoria de paridade</h3><p><code>parity-audit</code> compara o workspace Python contra um arquivo local (ignorado pelo git, quando presente) sêÂ³ pra medir cobertura ê¢â¬â nêÂ£o republica nem versiona o material original.</p></div>
   </div>
 </div></section>
 
 <section id="fluxo"><div class="wrap">
   <span class="chip">Como funciona</span>
   <h2>Do estudo do harness original ao workspace versionado</h2>
-  <p class="sub">O pipeline Ã© sequencial: primeiro o material de referÃªncia foi estudado (fora do controle de versÃ£o), depois reescrito em Python, e agora estÃ¡ sendo portado, mÃ³dulo a mÃ³dulo, para Rust.</p>
+  <p class="sub">O pipeline êÂ© sequencial: primeiro o material de referêÂªncia foi estudado (fora do controle de versêÂ£o), depois reescrito em Python, e agora estêÂ¡ sendo portado, mêÂ³dulo a mêÂ³dulo, para Rust.</p>
   <div class="flow">
-    <span>Estudo do harness vazado (nÃ£o versionado)</span><span class="arr">â†’</span>
-    <span>Workspace Python em <code>src/</code></span><span class="arr">â†’</span>
-    <span>CLI de manifesto/resumo/tools</span><span class="arr">â†’</span>
-    <span>Testes (<code>unittest</code>)</span><span class="arr">â†’</span>
+    <span>Estudo do harness vazado (nêÂ£o versionado)</span><span class="arr">ê¢â â</span>
+    <span>Workspace Python em <code>src/</code></span><span class="arr">ê¢â â</span>
+    <span>CLI de manifesto/resumo/tools</span><span class="arr">ê¢â â</span>
+    <span>Testes (<code>unittest</code>)</span><span class="arr">ê¢â â</span>
     <span>Port em Rust (<code>rust/</code>, em progresso)</span>
   </div>
 </div></section>
 
 <section id="pre"><div class="wrap">
-  <span class="chip">PrÃ©-requisitos</span>
+  <span class="chip">PrêÂ©-requisitos</span>
   <h2>O que precisa estar instalado</h2>
-  <p class="sub">Sem dependÃªncias externas â€” o workspace Python usa sÃ³ a biblioteca padrÃ£o, e o port Rust usa o toolchain padrÃ£o do Cargo.</p>
+  <p class="sub">Sem dependêÂªncias externas ê¢â¬â o workspace Python usa sêÂ³ a biblioteca padrêÂ£o, e o port Rust usa o toolchain padrêÂ£o do Cargo.</p>
   <div class="grid g3">
-    <div class="card"><h3>Python 3</h3><p>Qualquer Python 3.x recente (testado com 3.12). Nenhum pacote externo Ã© necessÃ¡rio.</p><pre><span class="c"># confira a versÃ£o</span>
+    <div class="card"><h3>Python 3</h3><p>Qualquer Python 3.x recente (testado com 3.12). Nenhum pacote externo êÂ© necessêÂ¡rio.</p><pre><span class="c"># confira a versêÂ£o</span>
 <span class="k">python3 --version</span></pre></div>
-    <div class="card"><h3>Git</h3><p>Pra clonar o repositÃ³rio.</p><pre><span class="c"># clonar</span>
+    <div class="card"><h3>Git</h3><p>Pra clonar o repositêÂ³rio.</p><pre><span class="c"># clonar</span>
 <span class="k">git clone git@github.com:linnoff88-dev/claw-code.git</span></pre></div>
-    <div class="card"><h3>Rust + Cargo (opcional)</h3><p>SÃ³ necessÃ¡rio se for explorar o port em <code>rust/</code>, ainda em estÃ¡gio de scaffolding.</p><pre><span class="c"># confira o cargo</span>
+    <div class="card"><h3>Rust + Cargo (opcional)</h3><p>SêÂ³ necessêÂ¡rio se for explorar o port em <code>rust/</code>, ainda em estêÂ¡gio de scaffolding.</p><pre><span class="c"># confira o cargo</span>
 <span class="k">cargo --version</span></pre></div>
   </div>
 </div></section>
 
 <section id="guia"><div class="wrap">
-  <span class="chip">Guia de uso Â· passo a passo</span>
+  <span class="chip">Guia de uso êÂ· passo a passo</span>
   <h2>Explorando o workspace Python</h2>
-  <p class="sub">Todos os comandos abaixo rodam a partir da raiz do repositÃ³rio clonado, com o Python padrÃ£o do sistema.</p>
+  <p class="sub">Todos os comandos abaixo rodam a partir da raiz do repositêÂ³rio clonado, com o Python padrêÂ£o do sistema.</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Resumo do workspace de porting</h3>
-    <p>Mostra quantos arquivos Python existem e o que cada mÃ³dulo de topo faz.</p>
+    <p>Mostra quantos arquivos Python existem e o que cada mêÂ³dulo de topo faz.</p>
 <pre><span class="k">python3 -m src.main summary</span>  <span class="c"># imprime o resumo do workspace (66 arquivos, etc.)</span></pre>
   </div></div>
 
@@ -181,27 +181,27 @@
 
   <div class="step"><div class="b">3</div><div>
     <h3>Subsistemas, comandos e ferramentas portados</h3>
-    <p>Inspeciona os inventÃ¡rios de mÃ³dulos, comandos e ferramentas mapeados a partir do harness original.</p>
+    <p>Inspeciona os inventêÂ¡rios de mêÂ³dulos, comandos e ferramentas mapeados a partir do harness original.</p>
 <pre><span class="k">python3 -m src.main subsystems --limit 16</span>
 <span class="k">python3 -m src.main commands --limit 10</span>
 <span class="k">python3 -m src.main tools --limit 10</span>  <span class="c"># cada um lista as entradas correspondentes</span></pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
-    <h3>Rodar a suÃ­te de testes</h3>
-    <p>Valida o workspace Python atual (22 testes na versÃ£o corrente).</p>
-<pre><span class="k">python3 -m unittest discover -s tests -v</span>  <span class="c"># roda a suÃ­te de verificaÃ§Ã£o</span></pre>
+    <h3>Rodar a suêÂ­te de testes</h3>
+    <p>Valida o workspace Python atual (22 testes na versêÂ£o corrente).</p>
+<pre><span class="k">python3 -m unittest discover -s tests -v</span>  <span class="c"># roda a suêÂ­te de verificaêÂ§êÂ£o</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Auditoria de paridade (opcional)</h3>
     <p>Compara a cobertura do port contra um arquivo local ignorado pelo git, quando presente no seu ambiente.</p>
-<pre><span class="k">python3 -m src.main parity-audit</span>  <span class="c"># sÃ³ funciona se vocÃª tiver o arquivo local de referÃªncia</span></pre>
+<pre><span class="k">python3 -m src.main parity-audit</span>  <span class="c"># sêÂ³ funciona se vocêÂª tiver o arquivo local de referêÂªncia</span></pre>
   </div></div>
 
   <div class="step"><div class="b">6</div><div>
     <h3>Explorar o port em Rust (opcional)</h3>
-    <p>O workspace Cargo em <code>rust/</code> ainda Ã© scaffolding â€” crates de runtime, comandos e ferramentas com testes que extraem metadados do workspace Python.</p>
+    <p>O workspace Cargo em <code>rust/</code> ainda êÂ© scaffolding ê¢â¬â crates de runtime, comandos e ferramentas com testes que extraem metadados do workspace Python.</p>
 <pre><span class="c"># a partir de rust/</span>
 <span class="k">cargo check --workspace</span>
 <span class="k">cargo test --workspace</span>
@@ -211,27 +211,27 @@
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Roadmap</span>
-  <h2>Onde o projeto estÃ¡ e para onde vai</h2>
-  <p class="sub">Segundo o prÃ³prio README do projeto â€” o port ainda nÃ£o Ã© um substituto funcional completo do harness original.</p>
-  <div class="phase"><div class="tag">Feito</div><div class="d"><strong>Workspace Python versionado</strong><span>Manifesto, comandos, ferramentas e motor de query cobrindo a superfÃ­cie observada do harness original, com suÃ­te de testes prÃ³pria.</span></div></div>
-  <div class="phase"><div class="tag">Em curso</div><div class="d"><strong>Port em Rust</strong><span>Scaffolding de crates (runtime, comandos, ferramentas, compat-harness) â€” meta declarada Ã© paridade de runtime, ainda nÃ£o atingida.</span></div></div>
-  <div class="phase"><div class="tag">Aberto</div><div class="d"><strong>Paridade de runtime completa</strong><span>O prÃ³prio projeto reconhece que o workspace Python ainda tem menos "fatias" executÃ¡veis do que o material original estudado.</span></div></div>
+  <h2>Onde o projeto estêÂ¡ e para onde vai</h2>
+  <p class="sub">Segundo o prêÂ³prio README do projeto ê¢â¬â o port ainda nêÂ£o êÂ© um substituto funcional completo do harness original.</p>
+  <div class="phase"><div class="tag">Feito</div><div class="d"><strong>Workspace Python versionado</strong><span>Manifesto, comandos, ferramentas e motor de query cobrindo a superfêÂ­cie observada do harness original, com suêÂ­te de testes prêÂ³pria.</span></div></div>
+  <div class="phase"><div class="tag">Em curso</div><div class="d"><strong>Port em Rust</strong><span>Scaffolding de crates (runtime, comandos, ferramentas, compat-harness) ê¢â¬â meta declarada êÂ© paridade de runtime, ainda nêÂ£o atingida.</span></div></div>
+  <div class="phase"><div class="tag">Aberto</div><div class="d"><strong>Paridade de runtime completa</strong><span>O prêÂ³prio projeto reconhece que o workspace Python ainda tem menos "fatias" executêÂ¡veis do que o material original estudado.</span></div></div>
 </div></section>
 
 <section id="afiliacao"><div class="wrap">
-  <span class="chip">Nota de nÃ£o afiliaÃ§Ã£o</span>
-  <h2>Isto nÃ£o Ã© um produto Anthropic</h2>
+  <span class="chip">Nota de nêÂ£o afiliaêÂ§êÂ£o</span>
+  <h2>Isto nêÂ£o êÂ© um produto Anthropic</h2>
   <div class="notice">
-    <p><strong>claw-code Ã© um projeto experimental e independente.</strong> Ele nasceu do estudo de um vazamento pÃºblico de cÃ³digo de harness de agente e existe, hoje, como uma reescrita prÃ³pria (Python, com port em Rust em progresso) dos padrÃµes arquiteturais observados â€” nÃ£o como cÃ³pia do material original, nem como produto mantido, endossado ou de qualquer forma afiliado Ã  Anthropic. O prÃ³prio README do repositÃ³rio declara isso explicitamente. Este guia trata o projeto como o que ele Ã©: uma pesquisa pessoal de engenharia de harness, com todas as limitaÃ§Ãµes de um port em andamento.</p>
+    <p><strong>claw-code êÂ© um projeto experimental e independente.</strong> Ele nasceu do estudo de um vazamento pêÂºblico de cêÂ³digo de harness de agente e existe, hoje, como uma reescrita prêÂ³pria (Python, com port em Rust em progresso) dos padrêÂµes arquiteturais observados ê¢â¬â nêÂ£o como cêÂ³pia do material original, nem como produto mantido, endossado ou de qualquer forma afiliado êÂ  Anthropic. O prêÂ³prio README do repositêÂ³rio declara isso explicitamente. Este guia trata o projeto como o que ele êÂ©: uma pesquisa pessoal de engenharia de harness, com todas as limitaêÂ§êÂµes de um port em andamento.</p>
   </div>
 </div></section>
 
 <footer>
   <div class="wrap">
     <div class="pill">Python</div><div class="pill">Rust / Cargo</div><div class="pill">unittest</div>
-    <p style="margin-top:18px">claw-code Â· reescrita experimental, nÃ£o afiliada Ã  Anthropic Â·
-      <a href="https://github.com/linnoff88-dev/claw-code">github.com/linnoff88-dev/claw-code</a> Â·
-      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
+    <p style="margin-top:18px">claw-code êÂ· reescrita experimental, nêÂ£o afiliada êÂ  Anthropic êÂ·
+      <a href="https://github.com/linnoff88-dev/claw-code">github.com/linnoff88-dev/claw-code</a> êÂ·
+      <a href="https://ARCKHê AI">ARCKHê AI</a></p>
   </div>
 </footer>
 
@@ -239,10 +239,10 @@
   (function(){
     var KEY='claw-code-theme';
     var b=document.body, t=document.getElementById('themeToggle');
-    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='â˜€ï¸'; }
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='ê¢Ëâ¬ê¯Â¸Â'; }
     t.addEventListener('click',function(){
       var light=b.classList.toggle('light');
-      t.textContent=light?'â˜€ï¸':'ðŸŒ™';
+      t.textContent=light?'ê¢Ëâ¬ê¯Â¸Â':'ê°Å¸Åâ¢';
       localStorage.setItem(KEY, light?'light':'dark');
     });
   })();
