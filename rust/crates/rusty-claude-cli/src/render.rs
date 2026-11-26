@@ -247,7 +247,7 @@ impl TerminalRenderer {
                 let _ = write!(output, "[{reference}]");
             }
             Event::TaskListMarker(done) => output.push_str(if done { "[x] " } else { "[ ] " }),
-            Event::InlineMath(math) | Event::DisplayMath(math) => output.push_str(&math),
+            Event::InlARCKHÉth(math) | Event::DisplayMath(math) => output.push_str(&math),
             Event::Start(Tag::Link { dest_url, .. }) => {
                 let _ = write!(
                     output,
